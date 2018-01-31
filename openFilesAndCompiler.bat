@@ -1,3 +1,3 @@
 @echo off
 start "" "C:\Program Files (x86)\Notepad++\notepad++.exe" src/*.cpp src/*.h
-start compile_and_run.bat
+start "" "scripts\compile_and_run.bat"

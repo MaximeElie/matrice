@@ -1,5 +1,5 @@
 @echo off
-"bin/matrice.exe"
+"../bin/matrice.exe"
 echo.
 echo.
 pause

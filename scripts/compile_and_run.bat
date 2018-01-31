@@ -8,13 +8,13 @@ mode con lines=999 cols=200
 	echo Appuyez sur une touche pour compiler puis executer le programme.
 	timeout /t -1 > nul
 	
-	if exist bin/matrice.exe (
+	if exist ../bin/matrice.exe (
 	
 		cls
 	
 		echo.
 		
-		del bin/matrice.exe
+		del ../bin/matrice.exe
 
 		echo.
 		echo.
@@ -24,7 +24,7 @@ mode con lines=999 cols=200
 
 	cls
 
-	g++ src/*.h src/*.cpp -o bin/matrice.exe
+	g++ ../src/*.h ../src/*.cpp -o ../bin/matrice.exe
 	
 	
 	if %ERRORLEVEL% NEQ 0 (
