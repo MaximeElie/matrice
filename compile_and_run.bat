@@ -8,23 +8,24 @@ mode con lines=999 cols=200
 	echo Appuyez sur une touche pour compiler puis executer le programme.
 	timeout /t -1 > nul
 	
-	if exist inverse_matrice.exe (
+	if exist bin/matrice.exe (
 	
 		cls
 	
 		echo.
 		
-		del inverse_matrice.exe
+		del bin/matrice.exe
 
 		echo.
 		echo.
 		echo.
 		echo.
 	)
-	
+
 	cls
 
-	g++ *.h *.cpp -o matrice.exe
+	g++ src/*.h src/*.cpp -o bin/matrice.exe
+	
 	
 	if %ERRORLEVEL% NEQ 0 (
 		echo.
