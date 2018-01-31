@@ -5,7 +5,7 @@ mode con lines=999 cols=200
 	
 	cls
 	echo.
-	echo Appuyez sur une touche pour Compiler et lancer le programme.
+	echo Appuyez sur une touche pour compiler puis executer le programme.
 	timeout /t -1 > nul
 	
 	if exist inverse_matrice.exe (
