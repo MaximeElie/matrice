@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1517510051 source:c:\users\maxurf\desktop\matrice\projet\interpretation.cpp
+	<vector>
+	<iostream>
+	"Interpretation.h"
+
+1517508514 c:\users\maxurf\desktop\matrice\projet\interpretation.h
+	<string>
+	<map>
+	"Matrice.h"
+	"Vecteur.h"
+
+1517511124 source:c:\users\maxurf\desktop\matrice\projet\main.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	<fstream>
+	<istream>
+	<map>
+	"Matrice.h"
+	"Vecteur.h"
+	"Interpretation.h"
+
+1517509747 c:\users\maxurf\desktop\matrice\projet\matrice.h
+	<vector>
+	"Vecteur.h"
+
+1517512749 c:\users\maxurf\desktop\matrice\projet\vecteur.h
+	<vector>
+	<string>
+
+1517512079 source:c:\users\maxurf\desktop\matrice\projet\matrice.cpp
+	<cmath>
+	"Matrice.h"
+
+1517511519 source:c:\users\maxurf\desktop\matrice\projet\vecteur.cpp
+	"Vecteur.h"
+
