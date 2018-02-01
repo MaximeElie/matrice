@@ -22,8 +22,6 @@
 		
 		/* Getters et setters */
 		int taille();
-		float scalaire(int i);
-		float setScalaire(int i, float valeur);
 		
 		/* Surcharge d'operateur */
 		Vecteur operator+(Vecteur V);	
@@ -34,6 +32,7 @@
 		Vecteur operator*=(float k);	
 		bool operator==(Vecteur V);
 		bool operator!=(Vecteur V);
+		float& operator[](int i);
 	};
 
 	/* methodes extarieurs a la classe Matrice */

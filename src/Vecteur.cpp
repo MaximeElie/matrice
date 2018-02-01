@@ -45,30 +45,6 @@ int Vecteur::taille() {
 	return tab.size();
 }
 
-float Vecteur::scalaire(int i) {
-	
-	if(taille() == 0) {
-		throw string("Erreur : matrice non initialisee");
-	}
-	else if(i > taille() || i < 1) {
-		throw string("Erreur : mauvaises coordonnees");
-	}
-	
-	return tab[i-1];
-}
-
-float Vecteur::setScalaire(int i, float valeur) {
-	
-	if(taille() == 0) {
-		throw string("Erreur : matrice non initialisee");
-	}
-	else if(i > taille() || i < 1) {
-		throw string("Erreur : mauvaises coordonnees");
-	}
-	
-	tab[i-1] = valeur;
-}
-
 
 
 
@@ -86,8 +62,8 @@ Vecteur Vecteur::operator+(Vecteur V) {
 	Vecteur res = vecteurNul(taille());
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		float nb = this->scalaire(i) + V.scalaire(i);
-		res.setScalaire(i, nb);
+		float nb = (*this)[i] + V[i];
+		res[i] = nb;
 	}
 	
 	return res;
@@ -114,8 +90,8 @@ Vecteur Vecteur::operator*(float k) {
 	Vecteur res = vecteurNul(taille());
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		float nb = k * this->scalaire(i);
-		res.setScalaire(i, nb);
+		float nb = k * (*this)[i];
+		res[i] = nb;
 	}
 	
 	return res;
@@ -137,7 +113,7 @@ bool Vecteur::operator==(Vecteur V) {
 	bool isEqual = true;
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		if(this->scalaire(i) != V.scalaire(i)) {
+		if((*this)[i] != V[i]) {
 			isEqual = false;
 		}
 	}
@@ -147,6 +123,18 @@ bool Vecteur::operator==(Vecteur V) {
 
 bool Vecteur::operator!=(Vecteur V) {
 	return !(*this==V);
+}
+
+float& Vecteur::operator[](int i) {
+	
+	if(taille() == 0) {
+		throw string("Erreur : matrice non initialisee");
+	}
+	else if(i > taille() || i < 1) {
+		throw string("Erreur : mauvaises coordonnees");
+	}
+	
+	return tab[i-1];
 }
 
 

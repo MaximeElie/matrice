@@ -1,5 +1,7 @@
 @echo off
-"../bin/matrice.exe"
+set /P args="arguments : "
+cls
+"../bin/matrice.exe" %args%
 echo.
 echo.
 pause

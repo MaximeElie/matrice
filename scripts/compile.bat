@@ -37,7 +37,11 @@ cd %~dp0
 
 		pause
 	) else (
-		start run
+		echo.
+		
+		echo compilation terminee
+		
+		timeout /t 2 /nobreak > nul
 	)
 
 goto do

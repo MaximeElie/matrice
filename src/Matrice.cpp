@@ -48,7 +48,7 @@ Matrice Matrice::matriceIdentite(int taille) {
 	Matrice matrice = matriceNulle(taille);
 	
 	for(int i = 1 ; i <= taille ; i++) {
-		matrice.setScalaire(i, i, 1);
+		matrice[i][i] = 1;
 	}
 	
 	return matrice;
@@ -68,7 +68,7 @@ Matrice Matrice::saisir() {
 			float nb;
 			cout << "M[" << i << "," << j << "] = ";
 			cin >> nb;
-			matrice.setScalaire(i, j, nb);
+			matrice[i][j] = nb;
 		}
 		cout << endl;
 	}
@@ -91,7 +91,7 @@ void Matrice::afficher() {
 	
 	for(int i = 1 ; i <= taille() ; i++) {
 		for(int j = 1 ; j <= taille() ; j++) {
-			cout << scalaire(i,j) << "\t";
+			cout << (*this)[i][j] << "\t";
 		}
 		cout << endl << endl;
 	}
@@ -104,30 +104,6 @@ void Matrice::afficher() {
 
 int Matrice::taille() {
 	return this->tab.size();
-}
-
-float Matrice::scalaire(int i, int j) {
-	
-	if(taille() == 0) {
-		throw string("Erreur : matrice non initialisee");
-	}
-	else if(i > taille() || i < 1 || j > taille() || j < 1) {
-		throw string("Erreur : mauvaises coordonnees");
-	}
-	
-	return tab[i-1].scalaire(j);
-}
-
-void Matrice::setScalaire(int i, int j, float valeur) {
-	
-	if(taille() == 0) {
-		throw string("Erreur : matrice non initialisee");
-	}
-	else if(i > taille() || i < 1 || j > taille() || j < 1) {
-		throw string("Erreur : mauvaises coordonnees");
-	}
-	
-	tab[i-1].setScalaire(j, valeur);
 }
 
 Vecteur Matrice::getLigne(int i) {
@@ -170,7 +146,7 @@ Vecteur Matrice::getColonne(int j) {
 	
 	Vecteur colonne = Vecteur::vecteurNul(taille());
 	for(int i = 1 ; i <= taille() ;i++) {
-		colonne.setScalaire(i, scalaire(i, j));
+		colonne[i] = (*this)[i][j];
 	}
 	
 	return colonne;
@@ -191,7 +167,7 @@ void Matrice::setColonne(int j, Vecteur colonne) {
 	}
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		setScalaire(i, j, colonne.scalaire(i));
+		(*this)[i][j] = colonne[i];
 	}
 }
 
@@ -209,7 +185,7 @@ float Matrice::mineur(int i, int j) {
 	}
 	
 	if(taille()==1) {
-		return scalaire(1, 1);
+		return (*this)[1][1];
 	}
 	
 	vector<Vecteur> tabMatrice;
@@ -218,7 +194,7 @@ float Matrice::mineur(int i, int j) {
 		vector<float> tabVecteur;
 		for(int jj = 1 ; jj <= taille() ; jj++) {
 			if(jj!=j) {
-				tabVecteur.push_back(scalaire(ii,jj));
+				tabVecteur.push_back((*this)[ii][jj]);
 			}
 		}
 		if(ii!=i) {
@@ -248,12 +224,12 @@ float Matrice::determinant() {
 	}
 	
 	if(taille()==1) {
-		return scalaire(1, 1);
+		return (*this)[1][1];
 	}
 	
 	float res = 0;
 	for(int i = 1 ; i <= taille() ; i++) {
-		res += scalaire(i, 1) * cofacteur(i, 1);
+		res += (*this)[i][1] * cofacteur(i, 1);
 	}
 	
 	return res;
@@ -268,7 +244,7 @@ Matrice Matrice::comatrice() {
 	
 	for(int i = 1 ; i <= taille() ; i++) {
 		for(int j = 1 ; j <= taille() ; j++) {
-			res.setScalaire(i, j, cofacteur(i,j));
+			res[i][j] = cofacteur(i,j);
 		}
 	}
 	
@@ -318,11 +294,8 @@ Matrice Matrice::operator+(Matrice M) {
 	
 	Matrice res = matriceNulle(taille());
 	
-	for(int i = 1 ; i <= taille() ; i++) {
-		for(int j = 1 ; j <= taille() ; j++) {
-			float nb = this->scalaire(i,j) + M.scalaire(i,j);
-			res.setScalaire(i, j, nb);
-		}
+	for(int i = 1 ; i <= taille() ; i++) {		
+		res[i] = (*this)[i] + M[i];
 	}
 	
 	return res;
@@ -355,9 +328,9 @@ Matrice Matrice::operator*(Matrice M) {
 		for(int j = 1 ; j <= taille() ; j++) {
 			float nb = 0;
 			for(int k = 1 ; k <= taille() ; k++) {
-				nb += this->scalaire(i,k) * M.scalaire(k,j);
+				nb += (*this)[i][k] * M[k][j];
 			}
-			res.setScalaire(i, j, nb);
+			res[i][j] = nb;
 		}
 	} 
 	
@@ -377,10 +350,7 @@ Matrice Matrice::operator*(float k) {
 	Matrice res = matriceNulle(taille());
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		for(int j = 1 ; j <= taille() ; j++) {
-			float nb = k * this->scalaire(i,j);
-			res.setScalaire(i, j, nb);
-		}
+		res[i] = k * (*this)[i];
 	}
 	
 	return res;
@@ -432,10 +402,8 @@ bool Matrice::operator==(Matrice M) {
 	bool isEqual = true;
 	
 	for(int i = 1 ; i <= taille() ; i++) {
-		for(int j = 1 ; j <= taille() ; j++) {
-			if(this->scalaire(i, j) != M.scalaire(i, j)) {
-				isEqual = false;
-			}
+		if((*this)[i] != M[i]) {
+			isEqual = false;
 		}
 	}
 	
@@ -444,6 +412,17 @@ bool Matrice::operator==(Matrice M) {
 
 bool Matrice::operator!=(Matrice M) {
 	return !(*this==M);
+}
+
+Vecteur& Matrice::operator[](int i) {
+	if(taille() == 0) {
+		throw string("Erreur : matrice non initialisee");
+	}
+	else if(i > taille() || i < 1) {
+		throw string("Erreur : mauvaises coordonnees");
+	}
+	
+	return tab[i-1];
 }
 
 

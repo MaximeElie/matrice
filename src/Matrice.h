@@ -31,8 +31,6 @@ class Matrice {
 
 	/* Getters et setters */
 	int taille();
-	float scalaire(int i, int j);
-	void setScalaire(int i, int j, float valeur);
 	Vecteur getLigne(int i);
 	void setLigne(int i, Vecteur ligne);
 	Vecteur getColonne(int j);
@@ -59,6 +57,7 @@ class Matrice {
 	Matrice operator^=(int n);
 	bool operator==(Matrice M);
 	bool operator!=(Matrice M);
+	Vecteur& operator[](int i);
 };
 
 /* methodes extarieurs a la classe Matrice */
