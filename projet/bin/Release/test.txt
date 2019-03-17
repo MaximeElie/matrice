@@ -1,8 +1,8 @@
 matrice=[[12.3, 2, 3], [4, 5, 6], [4, 5, 6]]
-lolilol=42
+int=42
 vecteur=[1, 2, 3]
-nb=78.5346
+float=78.5346
 :matrice
-:lolilol
+:int
 :vecteur
-:nb
+:float
